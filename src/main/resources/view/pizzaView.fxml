@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="1080.0" prefWidth="1934.0" spacing="30.0">
+         <children>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="MENU">
+               <font>
+                  <Font name="System Bold Italic" size="48.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <TableView prefHeight="782.0" prefWidth="967.0">
+              <columns>
+                <TableColumn prefWidth="167.0" text="NAZWA" />
+                <TableColumn prefWidth="600.0" text="SKŁADNIKI" />
+                  <TableColumn prefWidth="100.0" text="TYP" />
+                  <TableColumn prefWidth="100.0" text="CENA" />
+              </columns>
+            </TableView>
+            <AnchorPane prefHeight="229.0" prefWidth="967.0">
+               <children>
+                  <Label layoutX="145.0" layoutY="26.0" text="PIZZA DNIA" textAlignment="CENTER">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="230.0" fitWidth="356.0" layoutX="559.0" layoutY="15.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.34" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <image>
+                        <Image url="@../IMG/image.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="149.0" layoutY="98.0" prefHeight="73.0" prefWidth="252.0" text="   -LOSOWA-" AnchorPane.leftAnchor="149.0" AnchorPane.topAnchor="98.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox cache="true" prefHeight="1080.0" prefWidth="1920.0" spacing="30.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="KOSZYK" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="48.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <TextArea prefHeight="497.0" prefWidth="653.0">
+               <VBox.margin>
+                  <Insets left="150.0" right="150.0" />
+               </VBox.margin>
+            </TextArea>
+            <Label text="KWOTA DO ZAPŁATY:">
+               <VBox.margin>
+                  <Insets left="150.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="36.0" />
+               </font>
+            </Label>
+            <TextField promptText="WPROWADŻ ADRES DOSTAWY:">
+               <VBox.margin>
+                  <Insets left="150.0" right="150.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <TextField promptText="WPROWADŹ NUMER TELEFONU">
+               <VBox.margin>
+                  <Insets left="150.0" right="150.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <HBox prefHeight="51.0" prefWidth="653.0">
+               <VBox.margin>
+                  <Insets left="150.0" right="150.0" />
+               </VBox.margin>
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="654.0" text="ZAMÓW">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="654.0" text="WYCZYŚĆ">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizza_gui.controller.PizzaController">
    <children>
       <VBox prefHeight="1080.0" prefWidth="1934.0" spacing="30.0">
@@ -26,13 +25,16 @@
                </font>
             </Label>
             <Separator prefWidth="200.0" />
-            <TableView fx:id="tblPizza" prefHeight="782.0" prefWidth="967.0">
+            <TableView fx:id="tblPizza" onMouseClicked="#selectPizzaAction" prefHeight="782.0" prefWidth="967.0">
               <columns>
-                <TableColumn fx:id="tcName" prefWidth="167.0" text="NAZWA" />
+                <TableColumn fx:id="tcName" prefWidth="160.0" text="NAZWA" />
                 <TableColumn fx:id="tcIngredients" prefWidth="600.0" text="SKŁADNIKI" />
-                  <TableColumn fx:id="pcType" prefWidth="100.0" text="TYP" />
-                  <TableColumn fx:id="pcPrice" prefWidth="100.0" text="CENA" />
+                  <TableColumn fx:id="tcType" prefWidth="90.0" text="TYP" />
+                  <TableColumn fx:id="tcPrice" prefWidth="100.0" text="CENA" />
               </columns>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
             </TableView>
             <AnchorPane prefHeight="229.0" prefWidth="967.0">
                <children>
@@ -46,9 +48,9 @@
                         <Image url="@../IMG/image.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="tblRandomPizza" layoutX="149.0" layoutY="98.0" prefHeight="73.0" prefWidth="252.0" text="   -LOSOWA-" AnchorPane.leftAnchor="149.0" AnchorPane.topAnchor="98.0">
+                  <Label fx:id="tblRandomPizza" graphicTextGap="2.0" layoutX="149.0" layoutY="98.0" prefHeight="73.0" prefWidth="252.0" text="   -LOSOWA-" AnchorPane.leftAnchor="149.0" AnchorPane.topAnchor="98.0">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
                </children>
@@ -68,10 +70,10 @@
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Italic" size="24.0" />
                </font>
             </TextArea>
-            <Label text="KWOTA DO ZAPŁATY:">
+            <Label fx:id="lblSum" text="KWOTA DO ZAPŁATY: 0.00 ZŁ">
                <VBox.margin>
                   <Insets left="150.0" />
                </VBox.margin>
@@ -84,7 +86,7 @@
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
                <font>
-                  <Font size="24.0" />
+                  <Font name="Arial Bold" size="24.0" />
                </font>
             </TextField>
             <TextField fx:id="tfPhone" promptText="WPROWADŹ NUMER TELEFONU">
@@ -92,7 +94,7 @@
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
                <font>
-                  <Font size="24.0" />
+                  <Font name="Consolas" size="24.0" />
                </font>
             </TextField>
             <HBox prefHeight="51.0" prefWidth="653.0">

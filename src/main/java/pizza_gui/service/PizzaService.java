@@ -4,11 +4,16 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import pizza_gui.model.Ingredient;
 import pizza_gui.model.Pizza;
 import pizza_gui.model.PizzaModel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -112,8 +117,9 @@ public class PizzaService {
             alert.setHeaderText ("Potwierdzenie zamóienia");
             alert.setContentText ("Twoje zamówienie: \n" + taBasket.getText() + "\nDo zapłaty: " + amount + "zł");
             alert.showAndWait ();
-            clearOrder (taBasket, tfAddress, tfPhone, lblSum);}
-                else{
+            saveDataToFile(tfAddress,tfPhone,taBasket);
+            clearOrder(taBasket,tfAddress, tfPhone,lblSum); // czyści pola - koszyk, adres, telefon i sumę do zapłaty
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Zamówienie");
             alert.setHeaderText("Błędne dane zamówienia");
@@ -124,7 +130,7 @@ public class PizzaService {
             if(!isAdressValid(tfAddress.getText())){
                 validationResult += "adres dostawy ";
             }
-            if(!isPhoneValid (tfPhone.getText ()) && isAdressValid (tfAddress.getText ())){
+            if(isPhoneValid(tfPhone.getText()) && isAdressValid(tfAddress.getText())){
                 validationResult = "";
             }
             String emptyBasket = "";
@@ -133,6 +139,29 @@ public class PizzaService {
             }
             alert.setContentText(validationResult + emptyBasket);
             alert.showAndWait();
-                }
+        }
+    }
+    public void saveDataToFile(TextField tfAddress, TextField tfPhone, TextArea taBasket) {
+        try {
+            FileChooser fileChooser = new FileChooser ( );
+            // konfiguracja filtra rozszerzeń plików
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter (
+                    "Plik tekstowy (*.txt)", "*.txt");
+            fileChooser.getExtensionFilters ( ).add (extFilter);
+            File file = fileChooser.showSaveDialog (null);
+            PrintWriter printWriter = null;
+            printWriter = new PrintWriter (file);
+            printWriter.println ("POTWIERDZENIE ZAMÓWIENIA");
+            LocalDateTime dateTime = LocalDateTime.now ( );
+            printWriter.println ("Data i czas: " + dateTime);
+            printWriter.println ("Adres dostawy: " + tfAddress.getText ( ));
+            printWriter.println ("Telefon kontaktowy: " + tfPhone.getText ( ));
+            printWriter.println ("Czas dostawy: " + dateTime.plusMinutes (45));
+            printWriter.println ("Produkty: \n" + taBasket.getText ( ));
+            printWriter.println ("Suma do zapłaty : " + amount + " zł");
+            printWriter.close ( );
+        } catch (FileNotFoundException e) {
+            e.printStackTrace ( );
+        }
     }
 }

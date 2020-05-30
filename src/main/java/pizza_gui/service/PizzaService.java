@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class PizzaService {
         tcType.setCellValueFactory(new PropertyValueFactory<>("type"));
         tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         // ustawienie języka i formatowanie wartości double
-        Locale locale = new Locale("pl", "PL");
+        Locale locale = new Locale(",pl", "PL");
         // obiekt do wartości numerycznych
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
         tcPrice.setCellFactory(tc -> new TableCell<PizzaModel,Double>(){
@@ -115,7 +116,7 @@ public class PizzaService {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle ("Zamówienie");
             alert.setHeaderText ("Potwierdzenie zamóienia");
-            alert.setContentText ("Twoje zamówienie: \n" + taBasket.getText() + "\nDo zapłaty: " + amount + "zł");
+            alert.setContentText ("Twoje zamówienie: \n" + taBasket.getText() + String.format("\nDo zapłaty: %.2f zł", amount));
             alert.showAndWait ();
             saveDataToFile(tfAddress,tfPhone,taBasket);
             clearOrder(taBasket,tfAddress, tfPhone,lblSum); // czyści pola - koszyk, adres, telefon i sumę do zapłaty
@@ -142,6 +143,7 @@ public class PizzaService {
         }
     }
     public void saveDataToFile(TextField tfAddress, TextField tfPhone, TextArea taBasket) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyy HH:mm");
         try {
             FileChooser fileChooser = new FileChooser ( );
             // konfiguracja filtra rozszerzeń plików
@@ -153,15 +155,32 @@ public class PizzaService {
             printWriter = new PrintWriter (file);
             printWriter.println ("POTWIERDZENIE ZAMÓWIENIA");
             LocalDateTime dateTime = LocalDateTime.now ( );
-            printWriter.println ("Data i czas: " + dateTime);
+            printWriter.println ("Data i czas: " + dateTime.format(dtf));
             printWriter.println ("Adres dostawy: " + tfAddress.getText ( ));
             printWriter.println ("Telefon kontaktowy: " + tfPhone.getText ( ));
-            printWriter.println ("Czas dostawy: " + dateTime.plusMinutes (45));
+            printWriter.println ("Czas dostawy: " + dateTime.plusMinutes (45).format(dtf));
             printWriter.println ("Produkty: \n" + taBasket.getText ( ));
-            printWriter.println ("Suma do zapłaty : " + amount + " zł");
+            printWriter.println (String.format ("Suma do zapłaty : %.2f zł", amount));
             printWriter.close ( );
         } catch (FileNotFoundException e) {
             e.printStackTrace ( );
         }
+    }
+    public void clock(Label lblClock){
+        Runnable target;
+        Thread clockThread = new Thread (new Runnable ( ) {
+            @Override
+            public void run() {
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                while (true){
+                    try{System.out.println (LocalDateTime.now ().format(dateTimeFormatter) );
+                    Thread.currentThread ().sleep (1000);}
+                    catch (InterruptedException e){
+                        e.printStackTrace ();
+                    }
+                }
+            }
+        });
+        clockThread.start ();
     }
 }

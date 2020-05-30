@@ -3,11 +3,7 @@ package pizza_gui.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import pizza_gui.model.Ingredient;
 import pizza_gui.model.Pizza;
@@ -19,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
     public class PizzaController {
-
         // Aby dodać kolekcję obiektów do kontrolek FXML korzystamy ObservableList
         private ObservableList<PizzaModel> pizzas = FXCollections.observableArrayList();
         // Obiekt klasy Pizza service
@@ -45,7 +40,10 @@ import java.util.stream.Collectors;
         private TextField tfAddress;
         @FXML
         private TextField tfPhone;
-
+        @FXML
+        public Label lblClock;
+        @FXML
+        public ProgressBar pgExit;
         @FXML
         void clearAction(MouseEvent event) {
             pizzaService.clearOrder(taBasket, tfAddress, tfPhone, lblSum);
@@ -61,6 +59,7 @@ import java.util.stream.Collectors;
         }
         // konstruktor -> inicjalizacja GUI
         public void initialize(){
+            pizzaService.clock(lblClock);
             // wywołanie metod zaimplementowanych w logice biznesowej aplikacji
             pizzas = pizzaService.addPizzas(pizzas);
             pizzaService.insertPizzasToTable(tblPizza, tcName, tcIngredients, tcType, tcPrice, pizzas);

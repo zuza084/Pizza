@@ -48,7 +48,7 @@
                         <Image url="@../IMG/image.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="tblRandomPizza" graphicTextGap="2.0" layoutX="149.0" layoutY="98.0" prefHeight="73.0" prefWidth="252.0" text="   -LOSOWA-" AnchorPane.leftAnchor="149.0" AnchorPane.topAnchor="98.0">
+                  <Label fx:id="lblRandomPizza" graphicTextGap="2.0" layoutX="149.0" layoutY="98.0" prefHeight="73.0" prefWidth="252.0" text="   -LOSOWA-" AnchorPane.leftAnchor="149.0" AnchorPane.topAnchor="98.0">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -65,12 +65,12 @@
                </font>
             </Label>
             <Separator prefWidth="200.0" />
-            <TextArea fx:id="taBasket" editable="false" prefHeight="497.0" prefWidth="653.0" promptText="TWÓJ KOSZYK JEST PUSTY">
+            <TextArea fx:id="taBasket" editable="false" prefHeight="497.0" prefWidth="653.0" promptText="TWÓJ KOSZYK JEST PUSTY" wrapText="true">
                <VBox.margin>
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
                <font>
-                  <Font name="Arial Italic" size="24.0" />
+                  <Font name="Consolas Bold" size="18.0" />
                </font>
             </TextArea>
             <Label fx:id="lblSum" text="KWOTA DO ZAPŁATY: 0.00 ZŁ">
@@ -81,20 +81,20 @@
                   <Font name="System Bold Italic" size="36.0" />
                </font>
             </Label>
-            <TextField fx:id="tfAddress" promptText="WPROWADŻ ADRES DOSTAWY:">
+            <TextField fx:id="tfAddress" promptText="WPROWADŻ ADRES DOSTAWY(ulica, kod pocztowy miasto)">
                <VBox.margin>
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
                <font>
-                  <Font name="Arial Bold" size="24.0" />
+                  <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="tfPhone" promptText="WPROWADŹ NUMER TELEFONU">
+            <TextField fx:id="tfPhone" promptText="WPROWADŹ NUMER TELEFONU( XXX-XXX-XXX)">
                <VBox.margin>
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
                <font>
-                  <Font name="Consolas" size="24.0" />
+                  <Font name="Consolas" size="18.0" />
                </font>
             </TextField>
             <HBox prefHeight="51.0" prefWidth="653.0">
